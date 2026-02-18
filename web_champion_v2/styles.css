@@ -1,0 +1,248 @@
+:root {
+  --bg: #0c1218;
+  --panel: #131d27;
+  --panel-edge: #2a3a49;
+  --text: #ecf4ff;
+  --muted: #9fb7cc;
+  --accent: #2fd6b5;
+  --accent-2: #ffb84d;
+  --danger: #ff6b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 15% 10%, #143547 0%, #0c1218 35%, #0a0f14 100%);
+  color: var(--text);
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+  overflow-x: hidden;
+}
+
+.bg-orb {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+  opacity: 0.28;
+  animation: drift 8s ease-in-out infinite;
+}
+
+.orb-a {
+  background: #00c8a9;
+  top: -80px;
+  right: -80px;
+}
+
+.orb-b {
+  background: #ff9f43;
+  bottom: -120px;
+  left: -100px;
+  animation-delay: 1.5s;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(18px) scale(1.06); }
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  width: min(1000px, 92vw);
+  margin: 24px auto 40px;
+  display: grid;
+  gap: 14px;
+}
+
+.hero {
+  border: 1px solid var(--panel-edge);
+  border-radius: 16px;
+  padding: 18px 20px;
+  background: linear-gradient(150deg, rgba(19, 29, 39, 0.95), rgba(14, 23, 31, 0.95));
+  animation: rise 0.55s ease-out;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.kicker {
+  margin: 0 0 6px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(26px, 3.2vw, 40px);
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.card {
+  border: 1px solid var(--panel-edge);
+  border-radius: 14px;
+  background: rgba(19, 29, 39, 0.92);
+  padding: 14px 16px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.row {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.row.inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+input,
+textarea {
+  width: 100%;
+  background: #0f1820;
+  color: var(--text);
+  border: 1px solid #2a3a49;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(47, 214, 181, 0.15);
+}
+
+button {
+  border: 1px solid #325066;
+  background: #173043;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: #1c3a50;
+}
+
+button.cta {
+  background: linear-gradient(135deg, #1da88e, #2fd6b5);
+  color: #052119;
+  border-color: #28b59a;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 99px;
+  border: 1px solid #355167;
+  background: #102230;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hint {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+code {
+  background: #0a151d;
+  border: 1px solid #223547;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.error {
+  color: var(--danger);
+  min-height: 18px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.bars {
+  display: grid;
+  gap: 8px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 80px;
+  gap: 10px;
+  align-items: center;
+}
+
+.bar-track {
+  background: #0b1822;
+  border: 1px solid #274053;
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 220ms ease;
+}
+
+.json,
+.log {
+  background: #0b141c;
+  border: 1px solid #233748;
+  border-radius: 10px;
+  padding: 10px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.log {
+  min-height: 120px;
+  max-height: 240px;
+  overflow: auto;
+}
+
+@media (max-width: 740px) {
+  .bar-row {
+    grid-template-columns: 44px 1fr 64px;
+    gap: 6px;
+  }
+}
