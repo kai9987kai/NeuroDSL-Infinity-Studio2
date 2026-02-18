@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeuroDSL Champion V2 Console</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <main class="shell">
+    <header class="hero">
+      <p class="kicker">Standalone Web Console</p>
+      <h1>NeuroDSL Champion V2</h1>
+      <p class="subtitle">Connect to your local model runtime, run inference, inspect outputs, and benchmark response time.</p>
+    </header>
+
+    <section class="card">
+      <h2>Connection</h2>
+      <div class="row">
+        <label for="apiUrl">API Base URL</label>
+        <input id="apiUrl" type="text" value="http://127.0.0.1:8092">
+      </div>
+      <div class="row inline">
+        <button id="healthBtn">Check Health</button>
+        <span id="healthStatus" class="pill">Unknown</span>
+      </div>
+      <p class="hint">Run server first: <code>outputs/champion_release_v2/dist/NeuroDSL_Champion_v2.exe --mode serve --host 127.0.0.1 --port 8092</code></p>
+    </section>
+
+    <section class="card">
+      <h2>Input Vector (32 values)</h2>
+      <textarea id="vectorInput" rows="5"></textarea>
+      <div class="row inline">
+        <button id="randomBtn">Randomize</button>
+        <button id="sampleBtn">Load Sample</button>
+        <button id="inferBtn" class="cta">Run Inference</button>
+      </div>
+      <p id="inputError" class="error"></p>
+    </section>
+
+    <section class="card">
+      <h2>Output</h2>
+      <div id="outputBars" class="bars"></div>
+      <div class="row inline">
+        <button id="benchmarkBtn">Benchmark (20 requests)</button>
+        <span id="benchOut" class="pill">-</span>
+      </div>
+      <pre id="jsonOut" class="json"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Runtime Log</h2>
+      <pre id="logBox" class="log"></pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

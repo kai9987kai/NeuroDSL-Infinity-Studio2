@@ -1,0 +1,1 @@
+[128, 256], mhla: [256, 8], mambaconv: [256, 16, 7], topk_sparse: [256, 32], saliency_prune: [256, 0.2], rev_res: [256], moa: [256, 4, 2], bitnet: [256, 256], [256, 10]
