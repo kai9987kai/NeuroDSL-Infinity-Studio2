@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizer Lab</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --input-bg: #0d1117;
+      --card-bg: #1c2128;
+      --success: #238636;
+      --danger: #da3633;
+      --radius: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+      --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    #app {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .lab-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lab-title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), #a371f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lab-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    .lab-main {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .lab-main { grid-template-columns: 1fr; }
+    }
+
+    .lab-controls, .lab-output {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .lab-controls h2, .lab-output h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .control-group {
+      margin-bottom: 1rem;
+    }
+
+    .control-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 0.9rem;
+      transition: border-color var(--transition);
+    }
+
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+    }
+
+    input[type="range"] {
+      width: calc(100% - 40px);
+      accent-color: var(--accent);
+    }
+
+    .range-value {
+      display: inline-block;
+      width: 32px;
+      text-align: right;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--accent);
+      margin-right: 0.4rem;
+    }
+
+    .output-canvas {
+      min-height: 300px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .placeholder {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .lab-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .btn-success { background: var(--success); color: #fff; border-color: var(--success); }
+    .btn-danger  { background: var(--danger);  color: #fff; border-color: var(--danger); }
+
+    /* Preset / Export Bar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    .toolbar select {
+      width: auto;
+      min-width: 160px;
+    }
+
+    /* Log Panel */
+    .lab-log {
+      margin-top: 1rem;
+    }
+
+    .lab-log h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    .log-entries {
+      max-height: 200px;
+      overflow-y: auto;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.5rem 0.75rem;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .log-entry { padding: 0.15rem 0; border-bottom: 1px solid var(--border); }
+    .log-entry:last-child { border-bottom: none; }
+    .log-entry.warn { color: #d29922; }
+    .log-entry.error { color: var(--danger); }
+    .log-entry .timestamp { color: var(--text-muted); margin-right: 0.5rem; }
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="lab-header">
+      <h1 class="lab-title">Visualizer Lab</h1>
+      <p class="lab-subtitle">Single-File Lab App</p>
+    </header>
+
+    <main class="lab-main">
+      <section class="lab-controls" id="controls">
+        <h2>Controls</h2>
+        <div class="control-group">
+          <label for="sampleInput">Sample Input</label>
+          <input type="text" id="sampleInput" value="Hello Lab" />
+        </div>
+        <div class="control-group">
+          <label for="sampleRange">Range</label>
+          <input type="range" id="sampleRange" min="0" max="100" value="50" />
+          <span class="range-value" id="sampleRangeValue">50</span>
+        </div>
+        <div class="control-group">
+          <label for="sampleSelect">Mode</label>
+          <select id="sampleSelect">
+            <option value="mode1">Mode 1</option>
+            <option value="mode2">Mode 2</option>
+            <option value="mode3">Mode 3</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>
+            <input type="checkbox" id="sampleToggle" checked />
+            Enable Feature
+          </label>
+        </div>
+      </section>
+
+      <section class="lab-output" id="output">
+        <h2>Output</h2>
+        <div class="output-canvas" id="outputCanvas">
+          <canvas id="myChart"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <footer class="lab-footer">
+      <div class="toolbar" id="presetBar">
+        <select id="presetSelect">
+          <option value="">— Select Preset —</option>
+        </select>
+        <button class="btn btn-primary" onclick="Lab.savePreset()">💾 Save Preset</button>
+        <button class="btn btn-danger" onclick="Lab.deletePreset()">🗑️ Delete</button>
+      </div>
+      <div class="toolbar" id="exportBar">
+        <button class="btn" onclick="Lab.exportHTML()">📄 Export HTML</button>
+        <button class="btn" onclick="Lab.exportJSON()">📋 Export JSON</button>
+        <button class="btn" onclick="Lab.exportCSV()">📊 Export CSV</button>
+      </div>
+      <div class="lab-log" id="logPanel">
+        <h3>Console Log</h3>
+        <div class="log-entries" id="logEntries"></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  // ─── Lab Core ─────────────────────────────────────────────
+  const Lab = {
+    state: {},
+    logs: [],
+
+    init() {
+      this.bindControls();
+      this.log('Lab initialized');
+    },
+
+    bindControls() {
+      document.querySelectorAll('#controls input, #controls select').forEach(el => {
+        const key = el.id;
+        if (el.type === 'checkbox') {
+          this.state[key] = el.checked;
+          el.addEventListener('change', () => {
+            this.state[key] = el.checked;
+            this.onChange(key, el.checked);
+          });
+        } else if (el.type === 'range') {
+          this.state[key] = Number(el.value);
+          const display = document.getElementById(key + 'Value');
+          el.addEventListener('input', () => {
+            this.state[key] = Number(el.value);
+            if (display) display.textContent = el.value;
+            this.onChange(key, Number(el.value));
+          });
+        } else {
+          this.state[key] = el.value;
+          el.addEventListener('input', () => {
+            this.state[key] = el.value;
+            this.onChange(key, el.value);
+          });
+        }
+      });
+    },
+
+    onChange(key, value) {
+      this.log(`State changed: ${key} = ${JSON.stringify(value)}`);
+      this.render();
+    },
+
+    render() {
+      const canvas = document.getElementById('outputCanvas');
+      if (!canvas) return;
+      canvas.innerHTML = '<pre style="text-align:left;white-space:pre-wrap;word-break:break-all;">' +
+        JSON.stringify(this.state, null, 2) + '</pre>';
+    },
+
+    log(msg, level = 'info') {
+      const entry = { time: new Date().toISOString().slice(11, 19), msg, level };
+      this.logs.push(entry);
+      const container = document.getElementById('logEntries');
+      if (container) {
+        const div = document.createElement('div');
+        div.className = 'log-entry ' + level;
+        div.innerHTML = '<span class="timestamp">' + entry.time + '</span>' + this.escapeHtml(msg);
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
+      }
+    },
+
+    escapeHtml(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+  };
+
+  // ─── Preset Manager ─────────────────────────────────────
+  Lab.PRESET_KEY = 'lab_presets';
+
+  Lab.getPresets = function() {
+    try { return JSON.parse(localStorage.getItem(this.PRESET_KEY) || '{}'); }
+    catch { return {}; }
+  };
+
+  Lab.savePreset = function() {
+    const name = prompt('Preset name:');
+    if (!name) return;
+    const presets = this.getPresets();
+    presets[name] = { ...this.state };
+    localStorage.setItem(this.PRESET_KEY, JSON.stringify(presets));
+    this.refreshPresetList();
+    this.log('Preset saved: ' + name, 'info');
+  };
+
+  Lab.loadPreset = function(name) {
+    const presets = this.getPresets();
+    if (!presets[name]) return;
+    this.state = { ...presets[name] };
+    // Restore UI
+    Object.entries(this.state).forEach(([key, val]) => {
+      const el = document.getElementById(key);
+      if (!el) return;
+      if (el.type === 'checkbox') el.checked = val;
+      else el.value = val;
+      const display = document.getElementById(key + 'Value');
+      if (display) display.textContent = val;
+    });
+    this.render();
+    this.log('Preset loaded: ' + name, 'info');
+  };
+
+  Lab.deletePreset = function() {
+    const select = document.getElementById('presetSelect');
+    const name = select.value;
+    if (!name) { alert('Select a preset first.'); return; }
+    if (!confirm('Delete preset "' + name + '"?')) return;
+    const presets = this.getPresets();
+    delete presets[name];
+    localStorage.setItem(this.PRESET_KEY, JSON.stringify(presets));
+    this.refreshPresetList();
+    this.log('Preset deleted: ' + name, 'warn');
+  };
+
+  Lab.refreshPresetList = function() {
+    const select = document.getElementById('presetSelect');
+    const presets = this.getPresets();
+    select.innerHTML = '<option value="">— Select Preset —</option>';
+    Object.keys(presets).forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      select.appendChild(opt);
+    });
+  };
+
+  // Hook preset select
+  document.getElementById('presetSelect')?.addEventListener('change', function() {
+    if (this.value) Lab.loadPreset(this.value);
+  });
+
+  // ─── Export Utilities ────────────────────────────────────
+  Lab.exportHTML = function() {
+    const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+    this._download(blob, 'lab-snapshot.html');
+    this.log('Exported HTML snapshot');
+  };
+
+  Lab.exportJSON = function() {
+    const data = { state: this.state, presets: this.getPresets?.() || {}, exportedAt: new Date().toISOString() };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    this._download(blob, 'lab-data.json');
+    this.log('Exported JSON data');
+  };
+
+  Lab.exportCSV = function() {
+    const header = 'timestamp,level,message\n';
+    const rows = this.logs.map(e => `${e.time},${e.level},"${e.msg.replace(/"/g, '""')}"`).join('\n');
+    const blob = new Blob([header + rows], { type: 'text/csv' });
+    this._download(blob, 'lab-log.csv');
+    this.log('Exported CSV log');
+  };
+
+  Lab._download = function(blob, filename) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+  
+  // ─── Chart Initialization ──────────────────────────────
+  Lab.render = function() {
+    const ctx = document.getElementById('myChart')?.getContext('2d');
+    if (!ctx) return;
+    if (this.chart) this.chart.destroy();
+    this.chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: 'Lab Data',
+          data: [12, 19, 3, 5, 2, 3].map(v => v * (this.state.sampleRange / 50)),
+          backgroundColor: 'rgba(88, 166, 255, 0.5)',
+          borderColor: 'rgba(88, 166, 255, 1)',
+          borderWidth: 1
+        }]
+      }
+    });
+  };
+
+// ─── Initialize ──────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    Lab.init();
+    if (typeof Lab.refreshPresetList === 'function') Lab.refreshPresetList();
+  });
+  </script>
+</body>
+</html>

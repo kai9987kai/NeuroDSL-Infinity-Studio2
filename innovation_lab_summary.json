@@ -1,0 +1,43 @@
+{
+  "preset": "Research Frontier",
+  "total_experiments": 2,
+  "best_runs": [
+    {
+      "id": 1,
+      "timestamp": "2026-02-18T21:31:26.149533Z",
+      "preset": "Research Frontier",
+      "dsl_code": "kan: [128], diff_attn: [128], lora: [128, 16], [128, 10]",
+      "epochs": 15,
+      "final_loss": 0.1706565022468567,
+      "final_val_loss": 0.698982834815979,
+      "accuracy": 0.0,
+      "f1": 0.0,
+      "suggestions": [
+        "RESEARCH TIP: Consider replacing 'attn' with 'mamba' for linear-time complexity if sequence length is high."
+      ],
+      "notes": "AutoResearcher fact: Mamba layers are more efficient for sequence lengths > 2000 compared to standard Attention.",
+      "model_path": "",
+      "loss_fn": "MSE",
+      "lr": 0.01
+    },
+    {
+      "id": 2,
+      "timestamp": "2026-02-18T21:31:58.038524Z",
+      "preset": "Research Frontier",
+      "dsl_code": "kan: [128], diff_attn: [128], lora: [128, 16], [128, 10]",
+      "epochs": 15,
+      "final_loss": 0.17146822810173035,
+      "final_val_loss": 0.7210109829902649,
+      "accuracy": 0.0,
+      "f1": 0.0,
+      "suggestions": [
+        "RESEARCH TIP: Consider replacing 'attn' with 'mamba' for linear-time complexity if sequence length is high."
+      ],
+      "notes": "AutoResearcher fact: Adding RMSNorm before MoE routing can stabilize training in deep architectures.",
+      "model_path": "",
+      "loss_fn": "MSE",
+      "lr": 0.01
+    }
+  ],
+  "updated_at": "2026-02-18T21:31:58.039966Z"
+}
