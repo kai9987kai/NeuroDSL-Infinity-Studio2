@@ -1,0 +1,8 @@
+test_omni_preset (test_sdk.TestPhase10.test_omni_preset) ... ok
+test_sdk_build_train (test_sdk.TestPhase10.test_sdk_build_train) ... ok
+test_sdk_evolve (test_sdk.TestPhase10.test_sdk_evolve) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.343s
+
+OK

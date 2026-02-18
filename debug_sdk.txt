@@ -1,0 +1,100 @@
+﻿python : C:\Users\kai
+99\Desktop\New 
+folder (2)\NeuroDSL-I
+nfinity-Studio\parser
+_utils.py:73: Pyparsi
+ngDeprecationWarning:
+ 'setParseAction' 
+deprecated - use 
+'set_parse_action'
+At line:1 char:1
++ python -m unittest 
+test_sdk.py 2>&1 | 
+Out-File -FilePath 
+debug_sdk.tx ...
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (C:\User   
+ s\kai99\...t_par    
+se_action':Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+  number = Word(nums)
+.setParseAction(lambd
+a t: int(t[0]))
+C:\Users\kai99\Deskto
+p\New folder (2)\Neur
+oDSL-Infinity-Studio\
+parser_utils.py:75: P
+yparsingDeprecationWa
+rning: 
+'setParseAction' 
+deprecated - use 
+'set_parse_action'
+  float_number = Rege
+x(r'\d+\.?\d*').setPa
+rseAction(lambda t: 
+float(t[0]))
+.E.
+=====================
+=====================
+=====================
+=======
+ERROR: 
+test_sdk_build_train 
+(test_sdk.TestPhase10
+.test_sdk_build_train
+)
+---------------------
+---------------------
+---------------------
+-------
+Traceback (most 
+recent call last):
+  File "C:\Users\kai9
+9\Desktop\New folder 
+(2)\NeuroDSL-Infinity
+-Studio\test_sdk.py",
+ line 43, in 
+test_sdk_build_train
+    loss = 
+sdk.train(X, y, 
+epochs=2)
+  File "C:\Users\kai9
+9\Desktop\New folder 
+(2)\NeuroDSL-Infinity
+-Studio\neuro_sdk.py"
+, line 39, in train
+    self.trainer = Tr
+ainingEngine(self.mod
+el, 
+max_epochs=epochs, 
+base_lr=lr)
+                   ~~
+~~~~~~~~~~~~^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
+TypeError: TrainingEn
+gine.__init__() got 
+an unexpected 
+keyword argument 
+'base_lr'
+
+---------------------
+---------------------
+---------------------
+-------
+Ran 3 tests in 0.065s
+
+FAILED (errors=1)
+Omni-Model Built. Params: 113685
+SDK: Building model from DSL: [16, 16], [16, 10]...
+SDK: Model built. Params: 468
+SDK: Starting training for 2 epochs...
+SDK: Evolving architecture...
