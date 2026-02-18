@@ -1,0 +1,138 @@
+{
+  "objective": "maximize accuracy, robustness, and creative representations",
+  "input_dim": 32,
+  "output_dim": 10,
+  "device": "cpu",
+  "best": {
+    "idx": 0,
+    "dsl": "[32, 192], moe: [192, 8, 0], mod: [192, 6, 0.25], gqa: [192, 8, 1], [192, 10]",
+    "notes": "fallback_random",
+    "valid": true,
+    "final_loss": 0.39960771799087524,
+    "fitness": 0.40308504999087524,
+    "params": 3477332,
+    "issues": []
+  },
+  "results": [
+    {
+      "idx": 0,
+      "dsl": "[32, 192], moe: [192, 8, 0], mod: [192, 6, 0.25], gqa: [192, 8, 1], [192, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.39960771799087524,
+      "fitness": 0.40308504999087524,
+      "params": 3477332,
+      "issues": []
+    },
+    {
+      "idx": 1,
+      "dsl": "[32, 32], moe: [32, 6, 2], mod: [32, 6, 0.25], [32, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.8323871493339539,
+      "fitness": 0.8324627233339539,
+      "params": 75574,
+      "issues": []
+    },
+    {
+      "idx": 2,
+      "dsl": "[32, 96], moe: [96, 4, 0], mod: [96, 4, 0.35], residual: [96, 4], dropout: [0.3], gqa: [96, 8, 2], [96, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.5474305152893066,
+      "fitness": 0.5479797512893066,
+      "params": 549236,
+      "issues": []
+    },
+    {
+      "idx": 3,
+      "dsl": "[32, 256], moe: [256, 10, 2], mod: [256, 4, 0.25], residual: [256, 4], [256, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.4984515607357025,
+      "fitness": 0.5056776947357026,
+      "params": 7226134,
+      "issues": []
+    },
+    {
+      "idx": 4,
+      "dsl": "[32, 32], moe: [32, 8, 0], dropout: [0.3], [32, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.7234454154968262,
+      "fitness": 0.7235210834968262,
+      "params": 75668,
+      "issues": []
+    },
+    {
+      "idx": 5,
+      "dsl": "[32, 64], moe: [64, 8, 0], mod: [64, 6, 0.45], gqa: [64, 4, 1], [64, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.5990477204322815,
+      "fitness": 0.5994367964322815,
+      "params": 389076,
+      "issues": []
+    },
+    {
+      "idx": 6,
+      "dsl": "[32, 96], moe: [96, 6, 2], mod: [96, 2, 0.25], [96, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.6347485184669495,
+      "fitness": 0.6353069724669494,
+      "params": 558454,
+      "issues": []
+    },
+    {
+      "idx": 7,
+      "dsl": "[32, 32], moe: [32, 8, 0], mod: [32, 4, 0.45], residual: [32, 4], dropout: [0.2], [32, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.6091199517250061,
+      "fitness": 0.6092162597250061,
+      "params": 96308,
+      "issues": []
+    },
+    {
+      "idx": 8,
+      "dsl": "[32, 96], mod: [96, 2, 0.25], residual: [96, 2], [96, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.6490235924720764,
+      "fitness": 0.6491204764720764,
+      "params": 96884,
+      "issues": []
+    },
+    {
+      "idx": 9,
+      "dsl": "[32, 48], moe: [48, 10, 2], mod: [48, 4, 0.45], [48, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.5842510461807251,
+      "fitness": 0.5844891961807251,
+      "params": 238150,
+      "issues": []
+    },
+    {
+      "idx": 10,
+      "dsl": "[32, 256], mod: [256, 2, 0.45], [256, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.5265798568725586,
+      "fitness": 0.5269851248725586,
+      "params": 405268,
+      "issues": []
+    },
+    {
+      "idx": 11,
+      "dsl": "[32, 64], moe: [64, 10, 0], mod: [64, 6, 0.45], residual: [64, 2], gqa: [64, 8, 1], [64, 10]",
+      "notes": "fallback_random",
+      "valid": true,
+      "final_loss": 0.6756627559661865,
+      "fitness": 0.6761423279661866,
+      "params": 479572,
+      "issues": []
+    }
+  ]
+}
