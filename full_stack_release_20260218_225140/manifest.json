@@ -1,0 +1,18 @@
+{
+  "created_at_utc": "2026-02-18T22:58:27.421647+00:00",
+  "bundle": "NeuroDSL Full Stack",
+  "components": {
+    "web_v2": "web/web_champion_v2",
+    "web_power_champion": "web/web_power_champion",
+    "model_server_exe": "model_server\\NeuroDSL_Champion_v2.exe",
+    "console_exe": "console\\dist\\NeuroDSL_Console.exe",
+    "gui_exe": "gui\\NeuroDSL_Power_Champion_GUI_Plus.exe"
+  },
+  "entrypoints": [
+    "start_web_stack_all.bat",
+    "start_model_server.bat",
+    "start_web_console.bat",
+    "start_console.bat",
+    "start_gui.bat"
+  ]
+}
